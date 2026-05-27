@@ -1,108 +1,64 @@
-# IoT-MQTT-ChatApp
+# IoT MQTT Chat App
 
-> A lightweight IoT-based **chat application** implemented in Python using **MQTT (paho-mqtt)** and **Tkinter**.  
-This project demonstrates real-time publish/subscribe messaging with a GUI chat client as well as simple CLI publisher/subscriber examples.  
+> Lightweight IoT chat application — Python + **MQTT** (paho-mqtt) + **Tkinter** GUI. Demonstrates real-time publish/subscribe messaging with a desktop client plus simple CLI publisher/subscriber examples.
 
----
+[![Python](https://img.shields.io/badge/Python-3.7%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![MQTT](https://img.shields.io/badge/MQTT-660066?style=flat-square&logo=mqtt&logoColor=white)](https://mqtt.org/)
+[![Tkinter](https://img.shields.io/badge/Tkinter-GUI-FFC107?style=flat-square)](https://docs.python.org/3/library/tkinter.html)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-## Features
-
-- **Graphical Chat Client (Tkinter)**  
-  - Connect with a custom **name** and **topic**  
-  - Real-time chat via MQTT broker  
-  - Scrollable chat history  
-  - Enter `exit` to close session gracefully  
-
-- **MQTT Publisher**  
-  - Publishes a test message every 5 seconds  
-  - Useful for testing broker connectivity  
-
-- **MQTT Subscriber**  
-  - Listens on a topic and prints incoming messages  
+Built as part of Semester 6B IoT Lab — University of Moratuwa.
 
 ---
 
-## Project Structure
-```
-IoT-MQTT-ChatApp/
-├── Chat_App_Lab.py # GUI chat client using Tkinter + MQTT
-├── publisher.py # Simple MQTT publisher
-├── subscriber.py # Simple MQTT subscriber
-└── README.md # Project documentation
+## What's in the box
+
+- **GUI chat client** (`Chat_App_Lab.py`) — connect with a name + topic, real-time MQTT chat, scrollable history. Type `exit` to quit.
+- **CLI publisher** (`publisher.py`) — emits a test message every 5s to `/system`.
+- **CLI subscriber** (`subscriber.py`) — listens on `/system` and prints incoming messages.
+
+## Run it
+
+```bash
+git clone https://github.com/Anjanamb/IoT-MQTT-ChatApp.git
+cd IoT-MQTT-ChatApp
+pip install paho-mqtt
 ```
 
----
+### GUI chat client
 
-## Requirements
-
-- Python **3.7+**
-- Dependencies:
-  ```bash
-  pip install paho-mqtt
-
----
-
-## Usage
-
-### 1. Run the GUI Chat Client
 ```bash
 python Chat_App_Lab.py
 ```
-- Enter your Name and a Topic to join.
-- Press Connect.
-- Type your messages and hit Enter to send.
-- All users connected to the same topic will see the messages.
 
-### 2. Run the CLI Publisher
+Enter a name + topic, click **Connect**. Everyone on the same topic sees messages in real time.
+
+### CLI publisher / subscriber
+
 ```bash
-python publisher.py
+python publisher.py     # emits every 5 seconds
+python subscriber.py    # listens
 ```
-Publishes `"Test message"` every 5 seconds to `/system` topic.
 
-### Run the CLI Subscriber
-```bash
-python subscriber.py
-```
-Subscribes to `/system` topic and prints incoming messages.
+## How it works
 
----
-
-## How It Works
-- Broker: Uses HiveMQ’s public broker (`broker.hivemq.com:1883`) by default.
-- Publisher: Sends messages to an MQTT topic.
-- Subscriber: Receives messages from the topic.
-- GUI Client: Combines publisher and subscriber with a Tkinter chat window.
-
-Messages are exchanged in JSON format:
+- **Broker:** HiveMQ's public broker (`broker.hivemq.com:1883`) by default
+- **Wire format:** JSON
 
 ```json
-{
-  "Name": "Alice",
-  "msg": "Hello world!"
-}
+{ "Name": "Alice", "msg": "Hello world!" }
 ```
 
----
+The GUI client combines publisher and subscriber logic with a Tkinter window.
 
-## Future Enhancements
+## Roadmap
 
-- Add private messaging and multi-topic chatrooms
-- Include timestamps in messages
-- Enable TLS/SSL encryption for secure communication
-- Package as a desktop executable (PyInstaller)
-- Extend to a web-based MQTT chat
-
----
-
-## Acknowledgments
-
-This project was created as part of the Semester 6B IoT Lab. It serves as a foundational example of MQTT messaging in Python.
-
----
+- [ ] Private messaging and multi-topic chatrooms
+- [ ] Message timestamps
+- [ ] TLS / SSL encryption
+- [ ] Packaged desktop executable (PyInstaller)
+- [ ] Web-based MQTT chat
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
 
----
-
-
+[MIT](LICENSE) — see [anjanamb.github.io](https://anjanamb.github.io/) for more projects.
